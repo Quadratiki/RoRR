@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 927641678
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 19ca04aab366e38360da1594763f59cf
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1fe3abd029edb3522ae5dbbc711d0a74
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/models/prefabs/agonyeater.prefab
+- Assets/material/item/agonyeater/icon/templatebafficon.png
+- Assets/models/rav models/agonyeater.obj
+- Assets/material/item/agonyeater/icon/templateicon.png
+Dependencies:
+- C:/bliat ror/ror items/bombassets
