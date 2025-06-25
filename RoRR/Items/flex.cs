@@ -66,12 +66,7 @@ namespace flex
 
         }
 
-        public int GetCount(CharacterBody body)
-        {
-            if (!body || !body.inventory) { return 0; }
-
-            return body.inventory.GetItemCount(ItemDef);
-        }
+        
         public override ItemDisplayRuleDict CreateItemDisplayRules()
         {
             ItemBodyModelPrefab = ItemModel;
