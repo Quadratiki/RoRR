@@ -1,13 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="bombassets" />
+    <None Remove="bombassets.manifest" />
+    <None Remove="cactus" />
+    <None Remove="cactus.manifest" />
+    <None Remove="Items\NewFile1.txt" />
+    <None Remove="template" />
+    <None Remove="template.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bombassets" />
+    <EmbeddedResource Include="bombassets.manifest" />
+    <EmbeddedResource Include="cactus" />
+    <EmbeddedResource Include="cactus.manifest" />
+    <EmbeddedResource Include="template" />
+    <EmbeddedResource Include="template.manifest" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MMHOOK.RoR2" Version="2025.6.3" />
     <PackageReference Include="R2API" Version="5.0.5" />
-    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.4-r.0" />
   </ItemGroup>
 
 </Project>

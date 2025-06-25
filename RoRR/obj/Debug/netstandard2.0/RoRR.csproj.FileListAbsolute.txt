@@ -1,0 +1,6 @@
+C:\Users\grikc\source\repos\RoRR\RoRR\obj\Debug\netstandard2.0\RoRR.csproj.AssemblyReference.cache
+C:\Users\grikc\source\repos\RoRR\RoRR\obj\Debug\netstandard2.0\RoRR.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\grikc\source\repos\RoRR\RoRR\obj\Debug\netstandard2.0\RoRR.AssemblyInfoInputs.cache
+C:\Users\grikc\source\repos\RoRR\RoRR\obj\Debug\netstandard2.0\RoRR.AssemblyInfo.cs
+C:\Users\grikc\source\repos\RoRR\RoRR\obj\Debug\netstandard2.0\RoRR.csproj.CoreCompileInputs.cache
+C:\Users\grikc\source\repos\RoRR\RoRR\obj\Debug\netstandard2.0\RoRR.sourcelink.json

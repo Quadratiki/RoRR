@@ -1,50 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using BepInEx;
+﻿using BepInEx;
 using R2API;
 using R2API.Utils;
 using RoRR.Artifact;
 using RoRR.Equipment;
 using RoRR.Equipment.EliteEquipment;
 using RoRR.Items;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace RoRR
 {
+    
     [BepInPlugin(ModGuid, ModName, ModVer)]
     [BepInDependency(R2API.R2API.PluginGUID, R2API.R2API.PluginVersion)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
-    [R2APISubmoduleDependency(nameof(ItemAPI), nameof(LanguageAPI), nameof(EliteAPI))]
+
     public class Main : BaseUnityPlugin
     {
-        public const string ModGuid = "com.MyUsername.MyModName";
-        public const string ModName = "My Mod's Title and if we see this exact name on Thunderstore we will deprecate your mod";
-        public const string ModVer = "0.0.1";
+        public const string ModGuid = "Reverse";
+        public const string ModName = "Reverse";
+        public const string ModVer = "1.0.0";
 
         public static AssetBundle MainAssets;
+        public static AssetBundle cactusAsset;
+        public static AssetBundle bookasset;
+
 
         public List<ArtifactBase> Artifacts = new List<ArtifactBase>();
         public List<ItemBase> Items = new List<ItemBase>();
         public List<EquipmentBase> Equipments = new List<EquipmentBase>();
         public List<EliteEquipmentBase> EliteEquipments = new List<EliteEquipmentBase>();
 
-        //Provides a direct access to this plugin's logger for use in any of your other classes.
+
         public static BepInEx.Logging.ManualLogSource ModLogger;
+        [MethodImpl(MethodImplOptions.NoInlining)]
 
         private void Awake()
         {
             ModLogger = Logger;
 
-            // Don't know how to create/use an asset bundle, or don't have a unity project set up?
-            // Look here for info on how to set these up: https://github.com/KomradeSpectre/AetheriumMod/blob/rewrite-master/Tutorials/Item%20Mod%20Creation.md#unity-project
-            // (This is a bit old now, but the information on setting the unity asset bundle should be the same.)
 
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("RoRR.my_assetbundlefile"))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("RoRR.cactus"))
+            {
+                cactusAsset = AssetBundle.LoadFromStream(stream);
+            }
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("RoRR.bombassets"))
             {
                 MainAssets = AssetBundle.LoadFromStream(stream);
             }
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("RoRR.template"))
+            {
+                bookasset = AssetBundle.LoadFromStream(stream);
+            }
+
 
             //This section automatically scans the project for all artifacts
             var ArtifactTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(ArtifactBase)));
