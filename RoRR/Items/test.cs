@@ -9,15 +9,15 @@ using CharacterBody = RoR2.CharacterBody;
 
 
 
-namespace preach
+namespace roll
 {
-    public class preach : RoRR.Items.ItemBase<preach>
+    public class roll : RoRR.Items.ItemBase<roll>
 
     {
 
-        public override string ItemName => "preach";
+        public override string ItemName => "roll";
 
-        public override string ItemLangTokenName => "preach";
+        public override string ItemLangTokenName => "roll";
 
         public override string ItemPickupDesc => "jj";
 
@@ -25,7 +25,7 @@ namespace preach
         public override string ItemLore => "ur mom";
 
 
-        public override ItemTier Tier => ItemTier.Tier2;
+        public override ItemTier Tier => ItemTier.Tier3;
 
 
         public static GameObject ItemBodyModelPrefab;
@@ -51,7 +51,7 @@ namespace preach
             itemDisplay.rendererInfos = ItemHelpers.ItemDisplaySetup(ItemBodyModelPrefab);
 
             ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
-            rules.Add("preath", new RoR2.ItemDisplayRule[]
+            rules.Add("roll", new RoR2.ItemDisplayRule[]
             {
 
 
@@ -71,22 +71,42 @@ namespace preach
         {
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
         }
-
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody self, RecalculateStatsAPI.StatHookEventArgs args)
         {
-
             var invcount = GetCount(self);
             if (invcount >= 1)
-            {  
-               
-                args.baseHealthAdd = invcount * 10;
-                args.baseRegenAdd = invcount * 0.2f;            
-                args.armorAdd = invcount * 0.1f;
+            {
+                //Лови приколы
+                args.baseAttackSpeedAdd = self.attackSpeed + 35;
+                args.baseDamageAdd = self.damage + 40;
+                args.critAdd = self.crit + 30;
+            if (invcount >= 2)
+                //И ещё не много приколов
+                args.attackSpeedMultAdd =self.attackSpeed + 48;
+                args.damageMultAdd =self.damage + 69;
+                args.critDamageMultAdd =self.critMultiplier + 14;
+            if (invcount >=3 )
+               //Нехуй много стакать )) 
+                args.baseHealthAdd = self.baseMaxHealth * 0.5f;
+                args.healthMultAdd = self.baseMaxHealth * 0.5f;
+                args.moveSpeedMultAdd = self.moveSpeed * 0.5f;
+            if (invcount >= 4 )
+                //Еблан ?
+                args.baseHealthAdd = self.baseMaxHealth * 0.25f;
+                args.healthMultAdd = self.baseMaxHealth * 0.25f;
+                args.moveSpeedMultAdd = self.moveSpeed * 0.25f;
+            if ((invcount >= 5) && (invcount < 6))
+                //Ладно на приколы ))
+                args.baseAttackSpeedAdd = (self.attackSpeed + 35) * 70f;
+                args.baseDamageAdd = (self.damage + 80) * 70f;
+                args.critAdd = (self.crit + 65) * 70f ;
+                args.attackSpeedMultAdd = (self.attackSpeed + 70) * 70f;
+                args.damageMultAdd = (self.damage + 100) * 50f;
+                args.critDamageMultAdd = (self.critMultiplier + 50) * 70f;
             }
-        }
-
-
-
+                    
+                    
+      }
     }
 }
-           
+
