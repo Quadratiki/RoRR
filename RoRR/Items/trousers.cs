@@ -9,15 +9,16 @@ using CharacterBody = RoR2.CharacterBody;
 
 
 
-namespace preach
+namespace trousers
+
 {
-    public class preach : RoRR.Items.ItemBase<preach>
+    public class trousers : RoRR.Items.ItemBase<trousers>
 
     {
 
-        public override string ItemName => "preach";
+        public override string ItemName => "trousers";
 
-        public override string ItemLangTokenName => "preach";
+        public override string ItemLangTokenName => "trousers";
 
         public override string ItemPickupDesc => "jj";
 
@@ -25,7 +26,7 @@ namespace preach
         public override string ItemLore => "ur mom";
 
 
-        public override ItemTier Tier => ItemTier.Tier2;
+        public override ItemTier Tier => ItemTier.Lunar;
 
 
         public static GameObject ItemBodyModelPrefab;
@@ -51,7 +52,7 @@ namespace preach
             itemDisplay.rendererInfos = ItemHelpers.ItemDisplaySetup(ItemBodyModelPrefab);
 
             ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
-            rules.Add("preath", new RoR2.ItemDisplayRule[]
+            rules.Add("trousers", new RoR2.ItemDisplayRule[]
             {
 
 
@@ -71,22 +72,15 @@ namespace preach
         {
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
         }
-
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody self, RecalculateStatsAPI.StatHookEventArgs args)
         {
-
             var invcount = GetCount(self);
             if (invcount >= 1)
-            {  
-               
-                args.baseHealthAdd = invcount * 10;
-                args.baseRegenAdd = invcount * 0.2f;            
-                args.armorAdd = invcount * 0.1f;
+            {
+            args.moveSpeedMultAdd = invcount * 0.1f ;
+            args.baseMoveSpeedAdd = invcount - 5 ;
             }
+        
         }
-
-
-
     }
 }
-           

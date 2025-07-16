@@ -9,15 +9,15 @@ using CharacterBody = RoR2.CharacterBody;
 
 
 
-namespace preach
+namespace tick
 {
-    public class preach : RoRR.Items.ItemBase<preach>
+    public class tick : RoRR.Items.ItemBase<tick>
 
     {
 
-        public override string ItemName => "preach";
+        public override string ItemName => "tick";
 
-        public override string ItemLangTokenName => "preach";
+        public override string ItemLangTokenName => "tick";
 
         public override string ItemPickupDesc => "jj";
 
@@ -77,16 +77,16 @@ namespace preach
 
             var invcount = GetCount(self);
             if (invcount >= 1)
-            {  
-               
-                args.baseHealthAdd = invcount * 10;
-                args.baseRegenAdd = invcount * 0.2f;            
-                args.armorAdd = invcount * 0.1f;
+            {
+                args.critAdd = self.baseCrit + 5;
+                args.critDamageMultAdd = self.baseCrit * 0.2f * invcount;
+                if (invcount >= 2)
+                {
+                    args.critAdd = self.baseCrit + invcount * 2.5f;
+                }
+
             }
         }
-
-
-
     }
 }
-           
+        

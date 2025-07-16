@@ -22,15 +22,15 @@ using Util = RoR2.Util;
 
 namespace flex
 {
-    public class flex : RoRR.Items.ItemBase<flex>
+    public class glory : RoRR.Items.ItemBase<glory>
 
     {
-        public static BuffDef add_stats;
+        public static BuffDef gloru;
 
 
-        public override string ItemName => "flex";
+        public override string ItemName => "glory";
 
-        public override string ItemLangTokenName => "flex";
+        public override string ItemLangTokenName => "glory";
 
         public override string ItemPickupDesc => "jj";
 
@@ -38,7 +38,7 @@ namespace flex
         public override string ItemLore => "ur mom";
 
 
-        public override ItemTier Tier => ItemTier.Lunar;
+        public override ItemTier Tier => ItemTier.Boss;
 
 
         public static GameObject ItemBodyModelPrefab;
@@ -49,12 +49,12 @@ namespace flex
 
         private void CreateBuff()
         {
-            flex.add_stats = ScriptableObject.CreateInstance<BuffDef>();
-            flex.add_stats.buffColor = new Color((float)byte.MaxValue, (float)byte.MaxValue, (float)byte.MaxValue);
-            flex.add_stats.canStack = true;
-            flex.add_stats.isDebuff = false;
-            flex.add_stats.iconSprite = Main.bookasset.LoadAsset<Sprite>("templatebafficon.png");
-            ContentAddition.AddBuffDef(flex.add_stats);
+            glory.gloru = ScriptableObject.CreateInstance<BuffDef>();
+            glory.gloru.buffColor = new Color((float)byte.MaxValue, (float)byte.MaxValue, (float)byte.MaxValue);
+            glory.gloru.canStack = true;
+            glory.gloru.isDebuff = false;
+            glory.gloru.iconSprite = Main.bookasset.LoadAsset<Sprite>("templatebafficon.png");
+            ContentAddition.AddBuffDef(glory.gloru);
 
         }
         public override void Init(ConfigFile config)
@@ -64,7 +64,7 @@ namespace flex
             this.CreateBuff();
             this.CreateLang();
             this.CreateItemDisplayRules();
-            
+
         }
 
         public int GetCount(CharacterBody body)
@@ -80,7 +80,7 @@ namespace flex
             itemDisplay.rendererInfos = ItemHelpers.ItemDisplaySetup(ItemBodyModelPrefab);
 
             ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
-            rules.Add("flex", new RoR2.ItemDisplayRule[]
+            rules.Add("glory", new RoR2.ItemDisplayRule[]
             {
 
 
@@ -103,24 +103,21 @@ namespace flex
             On.RoR2.CharacterBody.OnTakeDamageServer += CharacterBody_OnTakeDamageServer;
         }
 
-       
+
 
         private void CharacterBody_OnTakeDamageServer(On.RoR2.CharacterBody.orig_OnTakeDamageServer orig, CharacterBody self, DamageReport damageReport)
         {
             var invcount = GetCount(self);
-            if (invcount > 0) 
+            if (invcount > 0)
             {
-               
-                self.SetBuffCount(add_stats.buffIndex, 0);
-                int buff = self.GetBuffCount(add_stats);
+
+                self.SetBuffCount(gloru.buffIndex, 0);
+                int buff = self.GetBuffCount(gloru);
 
                 self.attackSpeed = self.attackSpeed * 0.7f + (0.7f * buff / 35f);
-                self.baseDamage = self.baseDamage * 0.7f + (1.5f * buff / 5f);
-                self.baseMoveSpeed = self.baseMoveSpeed * 0.7f + (1.8f * buff / 25f);
-                self.baseMaxHealth = self.baseMaxHealth * 0.7f + (1.2f * buff / 2f);
-                self.baseArmor = self.baseArmor * 0.7f + (1f * buff);
-            }   
-        } 
+                self.baseDamage = self.baseDamage * 0.7f + (1.5f * buff / 5f);  
+            }
+        }
 
         public void OnHitEnemy(DamageReport report)
         {
@@ -130,27 +127,19 @@ namespace flex
             var invcount = GetCount(attackerInfo);
             if (invcount > 0)
             {
-                int buff = attackerInfo.GetBuffCount(add_stats);
+                int buff = attackerInfo.GetBuffCount(gloru);
 
                 attackerInfo.attackSpeed = attackerInfo.attackSpeed * 0.7f + (0.7f * buff / 35f);
                 attackerInfo.baseDamage = attackerInfo.baseDamage * 0.7f + (1.5f * buff / 5f);
-                attackerInfo.baseMoveSpeed = attackerInfo.baseMoveSpeed * 0.7f + (1.8f * buff / 25f);
-                attackerInfo.baseMaxHealth = attackerInfo.baseMaxHealth * 0.7f + (1.2f * buff / 2f);
-                attackerInfo.baseArmor = attackerInfo.baseArmor * 0.7f + (1f * buff);
+                
                 if (buff < invcount * 50)
                 {
-                    attackerInfo.AddBuff(add_stats);
-                }
-                 
-
-                  
-             
-         
-
+                    attackerInfo.AddBuff(gloru);
                 }
             }
         }
     }
+}
 
 
 
